@@ -1,8 +1,8 @@
-/* Name: dvdInfoAccess.c ver 1.0
+/* Name: dvdInfoAccess.c ver 1.1
 * Content : dvd 정보 저장 및 참조 함수들의 정의 
 * Implementation : LHH
-*
-*Last Modified: 08/19
+* 1.1 : 교재와 비슷하게 수정 
+*Last Modified: 09/01
 */
 
 #include "common.h"
@@ -31,7 +31,10 @@ int AddDvdInfo(char * ISBN, char * title, int genre){
 //	pDvdInfo->numOfRentCus=0; 
 	pDvdInfo->rentState=RETURNED;
 	numOfDvd++;
+	SaveDvdInfo();
 	printf("등록이 완료되었습니다."); 
+	
+	return numOfDvd;
 } 
 
 /*함수 : dvdInfo * GetDvdPtrByISBN(char * ISBN)
@@ -72,7 +75,6 @@ int SetDVDRented(char *ISBN, char * cusID, int rentDay){
 	if(pDVD==0)return 0;
 	
 	pDVD->rentState=RENTED;
-	AddRentList(ISBN,cusID,rentDay);
 	return 1;
 } 
 
@@ -100,8 +102,62 @@ int GetDVDRentState(char * ISBN){
 	return pDVD->rentState;
 } 
 
+/*함수 : int SaveDvdInfo(void)
+*기능 : DvdInfo정보 저방 
+*반환 : 정상 1, 아니면 0 반환
+*/
+int SaveDvdInfo(void){
+	int i;
+	FILE* fp;
+	fp=fopen("data/DvdBackup.dat","w");
+	if(fp==NULL){
+		printf("파일 오픈 오류\n"); 
+		return 0;
+	}
+	fwrite(&numOfDvd,sizeof(int),1,fp);
+	printf("%d",numOfDvd);
+	for(i=0;i<numOfDvd;i++){
+		fprintf(fp,"%s %s %d %d\n",dvdList[i]->ISBN,dvdList[i]->title,dvdList[i]->genre,dvdList[i]->rentState);
+//		fwrite(cusList[i]->ID,sizeof(cusList[i]->ID),1,fp);
+//		fwrite(cusList[i]->name,sizeof(cusList[i]->name),1,fp);
+//		fwrite(cusList[i]->phoneNum,sizeof(cusList[i]->phoneNum),1,fp);
+	}
+	fclose(fp);
+	puts("파일 저장 성공"); 
+}
 
-
+/*함수 : int LoadDvdInfo(void)
+*기능 : DvdInfo정보 로드 
+*반환 : 정상 1, 아니면 0 반환
+*/
+int LoadDvdInfo(void){
+	int i;
+	char ISBN[ISBN_LEN];
+	char title[TITLE_LEN];
+	int genre;
+	int rentState;// 대여 상태 정보
+	dvdInfo* pdvdInfo;
+	FILE* fp;
+	fp=fopen("data/DvdBackup.dat","r");
+	if(fp==NULL){
+		printf("파일 오픈 오류\n"); 
+		return 0;
+	}
+	fread(&numOfDvd,sizeof(int),1,fp);
+	printf("%d",numOfDvd);
+	for(i=0;i<numOfDvd;i++){
+		fscanf(fp,"%s%s%d%d",&ISBN,&title,&genre,&rentState);
+		printf("ISBN:%s title:%s genre:%d retnState:%d\n",ISBN,title,genre,rentState);	
+		pdvdInfo = (dvdInfo *)malloc(sizeof(dvdInfo));
+		strcpy(pdvdInfo->ISBN,ISBN);
+		strcpy(pdvdInfo->title,title);
+		pdvdInfo->genre=genre;
+		pdvdInfo->rentState=rentState;
+		dvdList[i]=pdvdInfo;
+	}
+	fclose(fp);
+	puts("파일 로드 성공"); 
+}
 
 //end of file
 

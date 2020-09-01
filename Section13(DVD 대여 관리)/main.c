@@ -7,14 +7,16 @@
 */
 
 #include "common.h"
-#include "cusManager.h"
+#include "blManager.h"
 #include "screenOut.h"
 
 enum{CUS_REGIST=1,CUS_SEARCH,DVD_REGIST,DVD_SEARCH,DVD_RENT,DVD_RETURN,DVD_RENT_CUS_PRINT, DVD_RENT_CUS_DAY_PRINT,QUIT};
 
 int main(void){
 	int inputMenu=0;
-	
+	LoadCusInfo();
+	LoadDvdInfo();
+	LoadRentInfo();
 	while(1){
 		ShowMenu();
 		scanf("%d", &inputMenu);
@@ -48,6 +50,9 @@ int main(void){
 		}
 		if(inputMenu==QUIT){
 			puts("이용해 주셔서 감사합니다~");
+			SaveCusInfo();
+			SaveDvdInfo();
+			SaveRentInfo();
 			break; 
 		}
 	}

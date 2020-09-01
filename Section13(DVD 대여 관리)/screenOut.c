@@ -1,9 +1,10 @@
-/* Name: screenOut.c ver 1.2
+/* Name: screenOut.c ver 1.3
 * Content : 콘솔 출력을 위한 함수들의 정의 
 * Implementation : LHH
 * 1.1: DVD등록, DVD 검색 추가 showDVDINFO 추가 
 * 1.2: DVD 대여,반납,대여고객 전체 조회 추가 
-*Last Modified: 08/20
+* 1.3: 교재와 비슷하게 수정 작업 
+*Last Modified: 09/01
 */
 
 #include "common.h"

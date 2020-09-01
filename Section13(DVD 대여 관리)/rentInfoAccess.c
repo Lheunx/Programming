@@ -24,6 +24,7 @@ void AddRentList(char*ISBN, char*cusID, int rentDay){
 	strcpy(rentList[numOfRentCus].ISBN,ISBN);
 	rentList[numOfRentCus].rentDay=rentDay;
 	numOfRentCus++;
+	SaveRentInfo();
 } 
 
 /*함수: void PrintOutRentAllCusInfo(char * ISBN)
@@ -55,4 +56,56 @@ void PrintOutCusALlRentInfo(char * ID, unsigned int start, unsigned int end){
 		}
 	}
 } 
+
+/*함수 : int SaveRentInfo(void)
+*기능 : DvdInfo정보 저방 
+*반환 : 정상 1, 아니면 0 반환
+*/
+int SaveRentInfo(void){
+	int i;
+	FILE* fp;
+	fp=fopen("data/RentBackup.dat","w");
+	if(fp==NULL){
+		printf("파일 오픈 오류\n"); 
+		return 0;
+	}
+	fwrite(&numOfRentCus,sizeof(int),1,fp);
+	printf("%d",numOfRentCus);
+	for(i=0;i<numOfRentCus;i++){
+		fprintf(fp,"%s %s %d\n",rentList[i].cusID,rentList[i].ISBN,rentList[i].rentDay);
+//		fwrite(cusList[i]->ID,sizeof(cusList[i]->ID),1,fp);
+//		fwrite(cusList[i]->name,sizeof(cusList[i]->name),1,fp);
+//		fwrite(cusList[i]->phoneNum,sizeof(cusList[i]->phoneNum),1,fp);
+	}
+	fclose(fp);
+	puts("파일 저장 성공"); 
+}
+
+/*함수 : int LoadRentInfo(void)
+*기능 : RentInfo정보 로드 
+*반환 : 정상 1, 아니면 0 반환
+*/
+int LoadRentInfo(void){
+	int i;
+	char cusID[ID_LEN];
+	char ISBN[ISBN_LEN];
+	unsigned int rentDay;
+	FILE* fp;
+	fp=fopen("data/RentBackup.dat","r");
+	if(fp==NULL){
+		printf("파일 오픈 오류\n"); 
+		return 0;
+	}
+	fread(&numOfRentCus,sizeof(int),1,fp);
+	printf("%d",numOfRentCus);
+	for(i=0;i<numOfRentCus;i++){
+		fscanf(fp,"%s%s%u",&cusID,&ISBN,&rentDay);
+		printf("cusID:%s ISBN:%s rentDay:%u\n",cusID,ISBN,rentDay);	
+		strcpy(rentList[i].cusID,cusID);
+		strcpy(rentList[i].ISBN,ISBN);
+		rentList[i].rentDay=rentDay;
+	}
+	fclose(fp);
+	puts("파일 로드 성공"); 
+}
 //end of file
