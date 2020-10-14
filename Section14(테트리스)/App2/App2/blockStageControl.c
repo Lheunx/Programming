@@ -7,11 +7,13 @@
 
 #include "common.h"
 #include "keyCurControl.h"
+#include "drawBoard.h"
 #include "blockInfo.h"
+#include "Board.h"
 
 static int currentBlockModel;
 static int curPosX, curPosY;
-
+static int a=0;
 
 /*
 함수: InitNewBlockPos(int x, int y)
@@ -98,5 +100,98 @@ void BlockDown(void){
 
 	SetCurrentCursorPos(curPosX, curPosY);
 	showBlock(blockModel[GetCurrentBlockIdx()]);
+}
+
+
+int BlockCrushCheck(){
+	int i, j,x,y;
+	int idx = GetCurrentBlockIdx();
+	y=curPosY-3;
+	x=curPosX / 2 - 7;
+	printf("X: %d Y: %d ",curPosX,curPosY);
+	
+	for(i=0; i< 4; i++){
+		for(j=0; j<4; j++){
+			if(GameBoard[y+i][x+j] + blockModel[idx][i][j] == 2){//2이면 충돌이겠쥬? 수정필요
+				printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
+				return 1;
+			}
+		}
+	}
+	printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
+	return 0; // 충돌이 없으면
+}
+/*
+함수: BlockLeft(void)
+기능: 모니터에 그려진 블록을 왼쪽으로 한 칸 이동
+반환: void
+*/
+void BlockLeft(void){
+	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
+	curPosX-=2;
+	if(BlockCrushCheck()){
+		curPosX+=2;
+	}
+	printf("X: %d",curPosX);
+	//x가 가로 2씩 줄어듦.
+	SetCurrentCursorPos(curPosX, curPosY);
+	showBlock(blockModel[GetCurrentBlockIdx()]);
+}
+
+/*
+함수: BlockRight(void)
+기능: 모니터에 그려진 블록을 오른쪽으로 한 칸 이동
+반환: void
+*/
+
+void BlockRight(void){
+	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
+	curPosX+=2;	
+	if(BlockCrushCheck()){
+		curPosX-=2;	
+	}
+	printf("X: %d",curPosX);
+
+	SetCurrentCursorPos(curPosX, curPosY);
+	showBlock(blockModel[GetCurrentBlockIdx()]);
+}
+
+/*
+함수: BlockRotate(void)
+기능: 모니터에 그려진 블록을 90도 회전
+반환: void
+*/
+void BlockRotate(void){
+	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
+	a++;
+	if(a>3){
+		a=0;
+		currentBlockModel-=3;
+		if(BlockCrushCheck()){
+			a=3;
+			currentBlockModel+=3;
+		}
+	}
+	else{	
+		currentBlockModel++;
+		if(BlockCrushCheck()){
+			a--;
+			currentBlockModel--;
+		}
+	}
+
+	SetCurrentCursorPos(curPosX, curPosY);
+	showBlock(blockModel[GetCurrentBlockIdx()]);
+
+}
+
+void printBoardStatus(){
+	int i,j;
+	for(i=0; i<20; i++){
+		for(j=0;j<12; j++){
+			printf("%d",GameBoard[i][j]);
+		}
+		printf("\n");
+	}
 }
 

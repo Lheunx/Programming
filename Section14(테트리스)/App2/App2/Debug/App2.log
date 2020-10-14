@@ -1,12 +1,14 @@
-﻿빌드 시작: 2020-10-06 오후 4:23:41
+﻿빌드 시작: 2020-10-14 오후 4:45:11
      1>2 노드의 "C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\App2\App2.vcxproj" 프로젝트(build 대상)입니다.
      1>InitializeBuildStatus:
          "AlwaysCreate"이(가) 지정되었기 때문에 "Debug\App2.unsuccessfulbuild"을(를) 만들고 있습니다.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt main.c
-         main.c
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TC /analyze- /errorReport:prompt blockStageControl.c
+         blockStageControl.c
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\Debug\App2.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\App2.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\Debug\App2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\Debug\App2.lib" /MACHINE:X86 Debug\keyCurControl.obj
+         c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\Debug\App2.exe" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\App2.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\Debug\App2.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\Debug\App2.lib" /MACHINE:X86 Debug\conHitRead.obj
+         Debug\drawBoard.obj
+         Debug\keyCurControl.obj
          Debug\main.obj
          Debug\testrismain.obj
          Debug\blockStageControl.obj
@@ -21,4 +23,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:01.72
+경과 시간: 00:00:01.91

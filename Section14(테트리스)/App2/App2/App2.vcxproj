@@ -61,6 +61,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="conHitRead.c" />
+    <ClCompile Include="drawBoard.c" />
     <ClCompile Include="keyCurControl.c" />
     <ClCompile Include="main.c" />
     <ClCompile Include="testrismain.c" />
@@ -68,7 +70,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blockInfo.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="common.h" />
+    <ClInclude Include="conHitRead.h" />
+    <ClInclude Include="drawBoard.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="keyCurControl.h" />
     <ClInclude Include="blockStageControl.h" />

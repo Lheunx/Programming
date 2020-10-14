@@ -9,11 +9,16 @@
 
 
 void InitNewBlockPos(int x, int y);
+
 void ChooseBlock(void);
 int GetCurrentBlockIdx(void);
 void showBlock(char block[][4]);
 void DeleteBlock(char block[][4]);
 void BlockDown();
+void BlockLeft();
+void BlockRight();
+void BlockRotate();
+void BlockCrushCheck(void);
 
 #endif
 //end

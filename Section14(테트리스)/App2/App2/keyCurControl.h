@@ -1,4 +1,4 @@
-/* Name : keyCurCuontrol.h ver 1.0
+/* Name : keyCurControl.h ver 1.0
  * content: 키보드, 커서관련 함수 선언
  * Implemnetation : LHH
  * last modified : 2020.10.06

@@ -27,6 +27,12 @@
     <ClCompile Include="main.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="conHitRead.c">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="drawBoard.c">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blockInfo.h">
@@ -42,6 +48,15 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="blockStageControl.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="conHitRead.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="drawBoard.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Board.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

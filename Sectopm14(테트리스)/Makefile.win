@@ -1,17 +1,17 @@
-# Project: Project4
+# Project: Tetris
 # Makefile created by Dev-C++ 5.11
 
-CPP      = g++.exe
-CC       = gcc.exe
+CPP      = g++.exe -D__DEBUG__
+CC       = gcc.exe -D__DEBUG__
 WINDRES  = windres.exe
-OBJ      = showBlocks.o
-LINKOBJ  = showBlocks.o
-LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc
+OBJ      = tetris/blockStageControl.o tetris/conHitRead.o tetris/drawBoard.o tetris/keyCurControl.o tetris/main.o tetris/testrismain.o
+LINKOBJ  = tetris/blockStageControl.o tetris/conHitRead.o tetris/drawBoard.o tetris/keyCurControl.o tetris/main.o tetris/testrismain.o
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -g3
 INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = Project4.exe
-CXXFLAGS = $(CXXINCS) 
-CFLAGS   = $(INCS) 
+BIN      = Tetris.exe
+CXXFLAGS = $(CXXINCS) -g3
+CFLAGS   = $(INCS) -g3
 RM       = rm.exe -f
 
 .PHONY: all all-before all-after clean clean-custom
@@ -24,5 +24,20 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-showBlocks.o: showBlocks.c
-	$(CC) -c showBlocks.c -o showBlocks.o $(CFLAGS)
+tetris/blockStageControl.o: tetris/blockStageControl.c
+	$(CC) -c tetris/blockStageControl.c -o tetris/blockStageControl.o $(CFLAGS)
+
+tetris/conHitRead.o: tetris/conHitRead.c
+	$(CC) -c tetris/conHitRead.c -o tetris/conHitRead.o $(CFLAGS)
+
+tetris/drawBoard.o: tetris/drawBoard.c
+	$(CC) -c tetris/drawBoard.c -o tetris/drawBoard.o $(CFLAGS)
+
+tetris/keyCurControl.o: tetris/keyCurControl.c
+	$(CC) -c tetris/keyCurControl.c -o tetris/keyCurControl.o $(CFLAGS)
+
+tetris/main.o: tetris/main.c
+	$(CC) -c tetris/main.c -o tetris/main.o $(CFLAGS)
+
+tetris/testrismain.o: tetris/testrismain.c
+	$(CC) -c tetris/testrismain.c -o tetris/testrismain.o $(CFLAGS)

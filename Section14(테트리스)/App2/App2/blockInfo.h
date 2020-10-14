@@ -1,7 +1,8 @@
-/* Name : blockInfo.h ver 1.0
+/* Name : blockInfo.h ver 1.1
+1.1 게임보드 추가
  * content: 각종 블록 정보
  * Implemnetation : LHH
- * last modified : 2020.10.05 
+ * last modified : 2020.10.12
 
 */
 
