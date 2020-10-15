@@ -49,4 +49,9 @@ int returnGboardWidth(void){
 int returnGboardHeight(void){
 	return GBOARD_HEIGHT;
 }
-
+int returnGboardOriginx(void){
+	return GBOARD_ORIGIN_X;
+}
+int returnGboardOriginy(void){
+	return GBOARD_ORIGIN_Y;
+}

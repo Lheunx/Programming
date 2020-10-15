@@ -21,7 +21,7 @@ int main(){
 	removeCursor();
 	
 	ChooseBlock();
-	printBoardStatus();
+	//printBoardStatus();
 
 	InitNewBlockPos(20,0);
 	while(1){

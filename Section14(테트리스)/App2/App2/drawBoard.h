@@ -11,5 +11,6 @@ void DrawGameBoard();
 int returnGboardWidth(void);
 int returnGboardHeight(void);
 void printBoardStatus(void);
-
+int returnGboardOriginx(void);
+int returnGboardOriginy(void);
 #endif

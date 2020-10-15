@@ -33,6 +33,9 @@
     <ClCompile Include="drawBoard.c">
       <Filter>리소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Board.c">
+      <Filter>리소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="blockInfo.h">

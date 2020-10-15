@@ -61,6 +61,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Board.c" />
     <ClCompile Include="conHitRead.c" />
     <ClCompile Include="drawBoard.c" />
     <ClCompile Include="keyCurControl.c" />

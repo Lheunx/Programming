@@ -14,6 +14,7 @@
 static int currentBlockModel;
 static int curPosX, curPosY;
 static int a=0;
+static int x,y;
 
 /*
 함수: InitNewBlockPos(int x, int y)
@@ -90,6 +91,77 @@ void DeleteBlock(char block[][4]){
 }
 
 /*
+함수: BlockCrushCheck(void)
+기능: 블록에 충돌을 체크 출동이 없을 시 0, 충돌 시 1.
+반환: int
+*/
+
+int BlockCrushCheck(){
+	int i, j;
+	int idx = GetCurrentBlockIdx();
+	y=curPosY-3;
+	x=curPosX / 2 - 7;
+	//printf("X: %d Y: %d ",curPosX,curPosY);
+	
+	for(i=0; i< 4; i++){
+		for(j=0; j<4; j++){
+			if(GameBoard[y+i][x+j] + blockModel[idx][i][j] == 2){//2이면 충돌이겠쥬? 수정필요
+				//printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
+				return 1;
+			}
+		}
+	}
+	//printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
+	return 0; // 충돌이 없으면
+}
+
+
+/*
+함수: ShowGameBoardBlock(void)
+기능: Game에 추가된 블록 출력
+반환: void
+*/
+
+void ShowGameBoardBlock(void){
+	int x = returnGboardOriginx();
+	int y = returnGboardOriginy();
+	int i,j;
+	//printf("%d",x);
+	for(i=0; i<19; i++){
+		for(j=1; j<11; j++){
+			SetCurrentCursorPos(x + (j*2), y + i+1);
+			//printf("X: %d Y: %d",x + (j*2),y + i);
+			if(GameBoard[i][j]==1){	
+				printf("■");
+			}
+		}
+	}
+}
+
+/*
+함수: GameBoardBlockAdd(void)
+기능: GameBoard에 블록을 입력
+반환: void
+*/
+void GameBoardBlockAdd(void){
+	int i, j;
+	int idx = GetCurrentBlockIdx();
+	y=curPosY-5;
+	x=curPosX / 2 -7;
+	for(i=0; i< 4; i++){
+		for(j=0; j<4; j++){
+			if(blockModel[idx][i][j] == 1){
+				GameBoard[y+i][x+j] = 1;
+				printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
+			}
+		}
+	}
+	printBoardStatus();
+	ShowGameBoardBlock();
+}
+
+
+/*
 함수: BlockDown(void)
 기능: 모니터에 그려진 블록을 아래로 한 칸 내림
 반환: void
@@ -97,30 +169,18 @@ void DeleteBlock(char block[][4]){
 void BlockDown(void){
 	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
 	curPosY+=1;
-
+	if(BlockCrushCheck()){
+		curPosY+=1;
+		GameBoardBlockAdd();
+		ChooseBlock();
+		InitNewBlockPos(20,0);
+	}
 	SetCurrentCursorPos(curPosX, curPosY);
 	showBlock(blockModel[GetCurrentBlockIdx()]);
 }
 
 
-int BlockCrushCheck(){
-	int i, j,x,y;
-	int idx = GetCurrentBlockIdx();
-	y=curPosY-3;
-	x=curPosX / 2 - 7;
-	printf("X: %d Y: %d ",curPosX,curPosY);
-	
-	for(i=0; i< 4; i++){
-		for(j=0; j<4; j++){
-			if(GameBoard[y+i][x+j] + blockModel[idx][i][j] == 2){//2이면 충돌이겠쥬? 수정필요
-				printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
-				return 1;
-			}
-		}
-	}
-	printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
-	return 0; // 충돌이 없으면
-}
+
 /*
 함수: BlockLeft(void)
 기능: 모니터에 그려진 블록을 왼쪽으로 한 칸 이동
@@ -132,7 +192,7 @@ void BlockLeft(void){
 	if(BlockCrushCheck()){
 		curPosX+=2;
 	}
-	printf("X: %d",curPosX);
+	//printf("X: %d",curPosX);
 	//x가 가로 2씩 줄어듦.
 	SetCurrentCursorPos(curPosX, curPosY);
 	showBlock(blockModel[GetCurrentBlockIdx()]);
@@ -150,7 +210,7 @@ void BlockRight(void){
 	if(BlockCrushCheck()){
 		curPosX-=2;	
 	}
-	printf("X: %d",curPosX);
+	//printf("X: %d",curPosX);
 
 	SetCurrentCursorPos(curPosX, curPosY);
 	showBlock(blockModel[GetCurrentBlockIdx()]);
