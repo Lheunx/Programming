@@ -38,6 +38,8 @@ void InitNewBlockPos(int x, int y){
 void ChooseBlock(void){
 	srand((unsigned int)time(NULL));	
 	currentBlockModel = (rand() % 7) * 4;
+	printf("%d",currentBlockModel);
+	a=0;
 }
 
 
@@ -99,8 +101,8 @@ void DeleteBlock(char block[][4]){
 int BlockCrushCheck(){
 	int i, j;
 	int idx = GetCurrentBlockIdx();
-	y=curPosY-3;
-	x=curPosX / 2 - 7;
+	y=curPosY-returnGboardOriginy();
+	x=(curPosX-returnGboardOriginx()) / 2 ;
 	//printf("X: %d Y: %d ",curPosX,curPosY);
 	
 	for(i=0; i< 4; i++){
@@ -127,9 +129,9 @@ void ShowGameBoardBlock(void){
 	int y = returnGboardOriginy();
 	int i,j;
 	//printf("%d",x);
-	for(i=0; i<19; i++){
+	for(i=0; i<20; i++){
 		for(j=1; j<11; j++){
-			SetCurrentCursorPos(x + (j*2), y + i+1);
+			SetCurrentCursorPos(x + (j*2), y + i);
 			//printf("X: %d Y: %d",x + (j*2),y + i);
 			if(GameBoard[i][j]==1){	
 				printf("■");
@@ -146,8 +148,9 @@ void ShowGameBoardBlock(void){
 void GameBoardBlockAdd(void){
 	int i, j;
 	int idx = GetCurrentBlockIdx();
-	y=curPosY-5;
-	x=curPosX / 2 -7;
+	/*y=curPosY-5;*/
+	y=curPosY-returnGboardOriginy()-1;
+	x=(curPosX-returnGboardOriginx()) / 2 ;
 	for(i=0; i< 4; i++){
 		for(j=0; j<4; j++){
 			if(blockModel[idx][i][j] == 1){
@@ -166,17 +169,18 @@ void GameBoardBlockAdd(void){
 기능: 모니터에 그려진 블록을 아래로 한 칸 내림
 반환: void
 */
-void BlockDown(void){
+int BlockDown(void){
 	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
 	curPosY+=1;
 	if(BlockCrushCheck()){
-		curPosY+=1;
 		GameBoardBlockAdd();
 		ChooseBlock();
-		InitNewBlockPos(20,0);
+		InitNewBlockPos(20,1);
+		return 1;
 	}
 	SetCurrentCursorPos(curPosX, curPosY);
 	showBlock(blockModel[GetCurrentBlockIdx()]);
+	return 0;
 }
 
 
@@ -247,7 +251,7 @@ void BlockRotate(void){
 
 void printBoardStatus(){
 	int i,j;
-	for(i=0; i<20; i++){
+	for(i=0; i<21; i++){
 		for(j=0;j<12; j++){
 			printf("%d",GameBoard[i][j]);
 		}

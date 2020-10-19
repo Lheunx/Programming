@@ -1,4 +1,4 @@
-﻿빌드 시작: 2020-10-15 오후 5:04:36
+﻿빌드 시작: 2020-10-19 오후 5:35:13
      1>2 노드의 "C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Section14(테트리스)\App2\App2\App2.vcxproj" 프로젝트(build 대상)입니다.
      1>InitializeBuildStatus:
          "AlwaysCreate"이(가) 지정되었기 때문에 "Debug\App2.unsuccessfulbuild"을(를) 만들고 있습니다.
@@ -24,4 +24,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:01.95
+경과 시간: 00:00:02.09

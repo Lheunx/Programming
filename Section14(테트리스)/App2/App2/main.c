@@ -23,7 +23,7 @@ int main(){
 	ChooseBlock();
 	//printBoardStatus();
 
-	InitNewBlockPos(20,0);
+	InitNewBlockPos(20,1);
 	while(1){
 		BlockDown();
 		keyCheck();

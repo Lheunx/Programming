@@ -14,7 +14,7 @@ void ChooseBlock(void);
 int GetCurrentBlockIdx(void);
 void showBlock(char block[][4]);
 void DeleteBlock(char block[][4]);
-void BlockDown();
+int BlockDown();
 void BlockLeft();
 void BlockRight();
 void BlockRotate();

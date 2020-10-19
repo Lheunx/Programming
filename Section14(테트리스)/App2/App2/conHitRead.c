@@ -8,7 +8,7 @@
 #include "common.h"
 #include "blockStageControl.h"
 #define KEY_SENSITIVE 100
-#define SYS_DELAY 20
+#define SYS_DELAY 15
 
 #define LEFT 75
 #define RIGHT 77
