@@ -19,6 +19,15 @@ void BlockLeft();
 void BlockRight();
 void BlockRotate();
 void BlockCrushCheck(void);
+void GameBoardBlockAdd();
+void BoardArrCheck();
+int IsOver();
+void ShowGameBoardBlock();
+int BlockSuperDown();
+void printJumLevel();
 
+void jumplus();
+
+int levelplus();
 #endif
 //end

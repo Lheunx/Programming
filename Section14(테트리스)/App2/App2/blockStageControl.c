@@ -16,6 +16,10 @@ static int curPosX, curPosY;
 static int a=0;
 static int x,y;
 
+static int level=1;
+static int j=0;
+static int jum=0;
+
 /*
 함수: InitNewBlockPos(int x, int y)
 기능: 블록 첫 위치 지정
@@ -38,7 +42,6 @@ void InitNewBlockPos(int x, int y){
 void ChooseBlock(void){
 	srand((unsigned int)time(NULL));	
 	currentBlockModel = (rand() % 7) * 4;
-	printf("%d",currentBlockModel);
 	a=0;
 }
 
@@ -117,6 +120,16 @@ int BlockCrushCheck(){
 	return 0; // 충돌이 없으면
 }
 
+/*
+함수: IsOver()
+기능: 게임 종료 체크
+반환: void
+*/
+
+int IsOver(){
+	if(BlockCrushCheck())return 1;
+	return 0;
+}
 
 /*
 함수: ShowGameBoardBlock(void)
@@ -132,9 +145,10 @@ void ShowGameBoardBlock(void){
 	for(i=0; i<20; i++){
 		for(j=1; j<11; j++){
 			SetCurrentCursorPos(x + (j*2), y + i);
-			//printf("X: %d Y: %d",x + (j*2),y + i);
 			if(GameBoard[i][j]==1){	
 				printf("■");
+				SetCurrentCursorPos(0,0);
+				printf("X: %d Y: %d",x + (j*2),y + i);
 			}
 		}
 	}
@@ -155,12 +169,12 @@ void GameBoardBlockAdd(void){
 		for(j=0; j<4; j++){
 			if(blockModel[idx][i][j] == 1){
 				GameBoard[y+i][x+j] = 1;
-				printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);
+				/*printf("y: %d x: %d i: %d j: %d ",y+i,x+j,i,j);*/
 			}
 		}
 	}
-	printBoardStatus();
-	ShowGameBoardBlock();
+	/*printBoardStatus();
+	ShowGameBoardBlock();*/
 }
 
 
@@ -173,9 +187,18 @@ int BlockDown(void){
 	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
 	curPosY+=1;
 	if(BlockCrushCheck()){
-		GameBoardBlockAdd();
-		ChooseBlock();
-		InitNewBlockPos(20,1);
+		return 1;
+	}
+	SetCurrentCursorPos(curPosX, curPosY);
+	showBlock(blockModel[GetCurrentBlockIdx()]);
+	return 0;
+}
+
+int BlockSuperDown(void){
+	DeleteBlock(blockModel[GetCurrentBlockIdx()]);
+	curPosY+=1;
+	if(BlockCrushCheck()){
+		curPosY--;
 		return 1;
 	}
 	SetCurrentCursorPos(curPosX, curPosY);
@@ -248,11 +271,48 @@ void BlockRotate(void){
 	showBlock(blockModel[GetCurrentBlockIdx()]);
 
 }
+void BoardArrCheck(){
+	int i,j,tot,c;
+	for(i=19; i>0; i--){
+		tot=0;
+		for(j=1;j<11; j++){
+			tot+=GameBoard[i][j];
+		}
+		if(tot==0)return;
+		else if(tot==10){
+			for(c=i; c>0; c--){
+				for(j=1;j<11; j++){
+					GameBoard[c][j]=GameBoard[c-1][j];
+				}
+			}
+		i++;
+		jum+=20;
+		j+=2;
+		}
+	}
+}
+void jumplus(){
+	jum+=10;
+	j++;
+}
+
+int levelplus(){
+	if(j>3){
+		level++;
+		j=0;
+	}
+	return level;
+}
+
+void printJumLevel(){
+	printf("현재 점수는 : %d 입니다.\n",jum);
+	printf("현재 레벨은 : %d 입니다.",level);
+}
 
 void printBoardStatus(){
 	int i,j;
-	for(i=0; i<21; i++){
-		for(j=0;j<12; j++){
+	for(i=0; i<20; i++){
+		for(j=1;j<11; j++){
 			printf("%d",GameBoard[i][j]);
 		}
 		printf("\n");

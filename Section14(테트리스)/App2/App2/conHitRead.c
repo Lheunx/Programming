@@ -14,6 +14,7 @@
 #define RIGHT 77
 #define UP 72
 #define DOWN 80
+#define SPACE 32
 
 static int keyDelayRate;
 
@@ -27,6 +28,10 @@ int rightInput(){
 
 int upInput(){
 	BlockRotate();
+}
+
+int spaceInput(){
+	while(!BlockSuperDown());
 }
 
 int keyCheck(){
@@ -44,6 +49,9 @@ int keyCheck(){
 				break;
 			case UP:
 				upInput();
+				break;
+			case SPACE:
+				spaceInput();
 				break;
 			}
 		}

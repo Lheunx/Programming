@@ -16,17 +16,38 @@
 
 int main(){
 	int i,j ;
-	InitKeyDelayRate(2);
-	DrawGameBoard();
+	InitKeyDelayRate(1);
+	/*DrawGameBoard();*/
 	removeCursor();
-	
-	ChooseBlock();
-	//printBoardStatus();
+	//
+	//ChooseBlock();
+	////printBoardStatus();
 
-	InitNewBlockPos(20,1);
+	//InitNewBlockPos(20,1);
 	while(1){
-		BlockDown();
-		keyCheck();
+		
+		system("cls");
+		ShowGameBoardBlock();
+		DrawGameBoard();
+		printJumLevel();
+		InitNewBlockPos(20,2);
+		ChooseBlock();
+		if(IsOver())break;
+		while(1){
+			if(BlockDown()){
+				GameBoardBlockAdd();
+				BoardArrCheck();
+				jumplus();
+				InitKeyDelayRate(levelplus());					
+				break;
+			}
+			keyCheck();
+		}
 	}
+
+
+	InitNewBlockPos(20,20);
+	puts("게임 오버");
+	getchar();
 	return 0;
 }
