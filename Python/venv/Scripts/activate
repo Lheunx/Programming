@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="C:\Users\User\Desktop\보안담당자\개인\Python프로그램\venv"
+VIRTUAL_ENV="C:\Users\User\Desktop\보안담당자\개인\C프로그램\CPower\Programming\Python\venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
